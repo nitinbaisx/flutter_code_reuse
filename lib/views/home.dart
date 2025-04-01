@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:newproject/controllers/api_service.dart';
 import 'package:newproject/modals/ProductsModal.dart';
 import 'package:http/http.dart' as http;
+import 'package:newproject/views/detail.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -87,29 +88,39 @@ class _HomeState extends State<Home> {
             );
           }
           final pro = products[index];
-          return Card(
-            elevation: 2,
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                child: Image.network(
-                  pro.images[0],
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Detail(product: pro),
                 ),
-              ),
-              title: Text(
-                pro.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              );
+            },
+            child: Card(
+              elevation: 2,
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 30,
+                  child: Image.network(
+                    pro.images[0],
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              subtitle: Text(
-                pro.description,
-                style: const TextStyle(
-                  fontSize: 15,
+                title: Text(
+                  pro.title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(
+                  pro.description,
+                  style: const TextStyle(
+                    fontSize: 15,
+                  ),
                 ),
               ),
             ),
